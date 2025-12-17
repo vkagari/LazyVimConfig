@@ -34,8 +34,8 @@ map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close all other tabs" }
 map("n", "<CR>", "o<Esc>")
 
 -- 全选
-map("n", "<C-a>", "GVgg")
-map({ "v", "i" }, "<C-a>", "<esc>GVgg")
+-- map("n", "<C-a>", "GVgg")
+-- map({ "v", "i" }, "<C-a>", "<esc>GVgg")
 
 map("n", "<C-y>", "GVggy<C-o><C-o>")
 map("v", "<C-y>", "<esc>GVggy<C-o><C-o>")

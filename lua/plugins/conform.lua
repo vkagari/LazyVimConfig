@@ -1,44 +1,53 @@
 return {
   "stevearc/conform.nvim",
 
-  -- 1. 触发器：这些设置是正确的
-  event = { "BufWritePre" }, -- 触发器1：保存文件时
-  cmd = { "Conform", "ConformInfo" }, -- 触发器2：运行命令时
+  event = { "BufWritePre" },
+  cmd = { "Conform", "ConformInfo" },
 
-  -- 2. 触发器3：添加手动按键 (你之前问到的)
-  keys = {
-    {
-      "<leader>f", -- 你可以改成你自己的快捷键
-      function()
-        -- 手动调用 conform 格式化
-        require("conform").format({ async = true, lsp_fallback = true })
-      end,
-      mode = { "n", "v" },
-      desc = "Format buffer",
-    },
-  },
-
-  -- 3. 这是【修复】:
-  -- opts 应该是一个纯数据表，而不是一个函数调用
   opts = {
-    -- 你在 opts 里定义的表会和 LazyVim 的默认设置自动合并 (merge)
-    -- 所以你只需要指定你想覆盖或添加的部分
+    formatters = {
+      ruff_format = {
+        args = function(self, ctx)
+          local config_names = { "pyproject.toml", "ruff.toml", ".ruff.toml" }
+
+          local found_config = vim.fs.find(config_names, {
+            path = ctx.dirname,
+            upward = true,
+            stop = vim.uv.os_homedir(),
+          })[1]
+
+          local default_args = { "format", "--force-exclude", "--stdin-filename", "$FILENAME", "-" }
+
+          if found_config then
+            -- A. 如果找到了项目配置，就用默认参数（完全尊重项目）
+            return default_args
+          else
+            -- B. 如果没找到，就追加 "--config" 参数指向你的默认文件
+            -- stdpath("config") 会自动获取你的 nvim 配置目录路径（跨平台）
+            local my_default_config = vim.fn.stdpath("config") .. "/ruff.toml"
+
+            -- 将 --config 加入参数表
+            -- 注意：Table 连接在 Lua 里比较繁琐，这里直接列出
+            return {
+              "format",
+              "--force-exclude",
+              "--config",
+              my_default_config,
+              "--stdin-filename",
+              "$FILENAME",
+              "-",
+            }
+          end
+        end,
+      },
+    },
     formatters_by_ft = {
       yaml = { "prettier" },
-      -- ["*"] = { "codespell" },
-
-      -- 你可能也想保留 LazyVim 的其他默认格式化器
       lua = { "stylua" },
-      python = { "isort", "black" },
-      -- ... 等等
+      python = { "ruff_fix", "ruff_format" },
     },
 
-    -- 你其他的选项
     async = true,
     log_level = vim.log.levels.INFO,
-
-    -- 你不需要在这里写 format_on_save
-    -- LazyVim 的默认配置会帮你处理：
-    -- 它看到 event = "BufWritePre" 就会自动启用 format_on_save
   },
 }
