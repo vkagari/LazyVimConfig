@@ -21,6 +21,7 @@ opt.enc = "utf8"
 -- Folding
 
 vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff"
 
 -- enable powershell
 local system = vim.loop.os_uname().sysname
@@ -68,3 +69,5 @@ else
   vim.g.clipboard = nil
 end
 vim.o.clipboard = "unnamedplus"
+
+opt.formatoptions:append("mB")
