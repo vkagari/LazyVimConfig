@@ -9,3 +9,10 @@ vim.api.nvim_create_autocmd("FileType", {
     -- vim.opt_local.formatoptions:append("aw")
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "vue", "json", "javascript", "typescript" }, -- 针对这些前端文件
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+})
