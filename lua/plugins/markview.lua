@@ -1,6 +1,6 @@
 -- For `plugins/markview.lua` users.
 return {
-  enabled = true,
+  enabled = false,
   "OXY2DEV/markview.nvim",
   lazy = false,
 
