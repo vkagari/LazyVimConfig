@@ -6,7 +6,6 @@ local opt = vim.opt
 
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 opt.shiftwidth = 4 -- Size of an indent
-opt.autochdir = true
 
 -- 自动设置lua缩进
 vim.api.nvim_command("autocmd FileType lua setlocal shiftwidth=2")

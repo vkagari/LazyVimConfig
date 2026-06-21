@@ -46,6 +46,19 @@ del("n", "<leader>ft")
 del("n", "<leader>fT")
 -- map("n", "<C-_>", "<cmd>ToggleTerm<cr>")
 
+local float_terminal
+local function toggle_float_terminal()
+  local Terminal = require("toggleterm.terminal").Terminal
+  float_terminal = float_terminal or Terminal:new({ direction = "float", hidden = true })
+  float_terminal:toggle()
+end
+
+-- Cover both the traditional <C-_> control byte and the distinct <C-/>
+-- keycode emitted by terminals that support an extended keyboard protocol.
+for _, key in ipairs({ "<C-/>", "<C-_>" }) do
+  map({ "n", "i", "t" }, key, toggle_float_terminal, { desc = "Toggle Float Terminal" })
+end
+
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   map("t", "<esc><esc>", [[<C-\><C-n>]], opts)
