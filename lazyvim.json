@@ -1,18 +1,24 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.coding.mini-surround",
+    "lazyvim.plugins.extras.coding.nvim-cmp",
     "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.mini-files",
+    "lazyvim.plugins.extras.editor.telescope",
     "lazyvim.plugins.extras.lang.clangd",
     "lazyvim.plugins.extras.lang.java",
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.python",
+    "lazyvim.plugins.extras.lang.typescript",
+    "lazyvim.plugins.extras.lang.vue",
+    "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.ui.mini-indentscope",
     "lazyvim.plugins.extras.ui.treesitter-context"
   ],
+  "install_version": 7,
   "news": {
-    "NEWS.md": "5114"
+    "NEWS.md": "11866"
   },
-  "version": 4
+  "version": 8
 }

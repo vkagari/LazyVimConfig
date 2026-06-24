@@ -1,6 +1,6 @@
 local M = {}
 
-vim.o.guifont = "Cousine Nerd Font,Source Han Sans SC VF:h12:b"
+vim.o.guifont = "Hack Nerd Font Mono,思源黑体 CN:h12:b"
 vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_refresh_rate = 144
 vim.g.neovide_no_idle = true
@@ -26,6 +26,6 @@ vim.api.nvim_set_keymap("!", "<c-v>", "<C-R>+", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("t", "<c-v>", "<C-R>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<c-v>", "<C-R>+", { noremap = true, silent = true })
 
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_opacity = 0.85
 
 return M

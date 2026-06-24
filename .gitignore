@@ -9,3 +9,4 @@ data
 hello.md
 lazy-lock.json
 yarn.lock
+.claude/
